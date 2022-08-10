@@ -24,9 +24,15 @@
             height: 100%;
         }
     </style>
+    @if (config('midtrans.is_production') == true)
+    <script type="text/javascript"
+    src="https://app.midtrans.com/snap/snap.js"
+    data-client-key="{{config('midtrans.client_key')}}"></script>
+    @else
     <script type="text/javascript"
     src="https://app.sandbox.midtrans.com/snap/snap.js"
     data-client-key="{{config('midtrans.client_key')}}"></script>
+    @endif
 @endsection
 
 @section('body')
