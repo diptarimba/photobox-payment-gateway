@@ -49,6 +49,9 @@
                 </figure>
             </div>
             <div class="col-12 align-self-center">
+                <p class="status-payment h3 text-red"></p>
+            </div>
+            <div class="col-12 align-self-center">
                 <div class="col-lg-3 col-md-6 col-6 mx-auto">
                     <div class="card">
                         <div class="card-body">
@@ -152,6 +155,8 @@
                         window.snap.pay(tokenBayar, {
                             onSuccess: function(result) {
                                 /* You may add your own implementation here */
+                                $('.status-payment').text('Payment Berhasil, Happy Snap!');
+                                await new Promise(r => setTimeout(r, 3000));
                                 window.close();
                                 // console.log(result);
                             },
