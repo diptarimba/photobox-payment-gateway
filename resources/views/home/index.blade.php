@@ -64,12 +64,13 @@
                             <div class="text-center h2 text-white text-wrap header-bg">
                                 WANNA TAKE A PHOTO?
                             </div>
-                            <select id="select-price" class="form-select" aria-label="Default select example">
+                            <input class="form-control text-center" disabled type="text" name="price" id="price" value="{{$priceData->price}}">
+                            {{-- <select id="select-price" class="form-select" aria-label="Default select example">
                                 <option selected>Select Package</option>
                                 @foreach ($priceData as $each)
                                     <option value="{{ $each->price }}">{{ $each->name }} ( Rp.{{ number_format($each->price, 0, ',', '.') }} )</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                         </div>
                         <button class="btn btn-primary btnSubmit">Let's
                             Go!</button>
@@ -89,14 +90,14 @@
                                         <label for="packageName" class="col-sm-2 col-form-label">Package</label>
                                         <div class="col-sm-10">
                                             <input id="packageName"type="text" readonly class="form-control-plaintext"
-                                                id="packageName" value="" disabled>
+                                                id="packageName" value="{{$priceData->name}}" disabled>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="packagePrice" class="col-sm-2 col-form-label">Price</label>
                                         <div class="col-sm-10">
                                             <input id="packagePrice" type="text" readonly class="form-control-plaintext"
-                                                id="packagePrice" value="" disabled>
+                                                id="packagePrice" value="{{$priceData->price}}" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -124,19 +125,9 @@
             return new Promise(resolve => setTimeout(resolve, ms));
         }
         $(document).ready(() => {
-            $('#select-price').on('change', function() {
-                $('#select-price option').each(function() {
-                    if ($(this).is(':selected')) {
-                        // $(this).val()
-                        $('#packageName').val($(this).text())
-                        $('#packagePrice').val($(this).val())
-                    }
-                })
-            })
-
             $('.btnSubmit').on('click', function(){
-                var name = $('#packageName').val();
-                var price = $('#packagePrice').val();
+                var name = '{{$priceData->name}}';
+                var price = '{{$priceData->price}}';
                 if(name !== '' && price !== ''){
                     $('#staticBackdrop').modal('toggle');
                 }else{
@@ -149,7 +140,7 @@
             var payButton = document.getElementById('pay-button');
             payButton.addEventListener('click', function() {
                 // Update Web Check
-                var cost = $('#packagePrice').val();
+                var cost = $('#price').val();
                 $.ajax({
                     url: '{{ route('home.index') }}',
                     dataType: 'json',
@@ -160,6 +151,7 @@
                     success: function(data) { // check if available
                         // status.text('Waiting for Scanning!');
                         var tokenBayar = data.token
+                        $('#staticBackdrop').modal('toggle');
                         // console.log(tokenBayar)
                         window.snap.pay(tokenBayar, {
                             onSuccess: function(result) {

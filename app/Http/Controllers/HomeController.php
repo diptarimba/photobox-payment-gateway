@@ -20,7 +20,7 @@ class HomeController extends Controller
                 return $this->generateSnapToken($request->cost);
             }
         }
-        $priceData = Price::get();
+        $priceData = Price::first();
         $quote = Quote::inRandomOrder()->first();
 
         return view('home.index', compact('priceData', 'quote'));
@@ -35,7 +35,6 @@ class HomeController extends Controller
                 'order_id' => $code,
                 'gross_amount' => $cost,
             ),
-            "enabled_payments" => ["gopay", "shopeepay"],
             'customer_details' => array(
                 'first_name' => fake()->name(),
                 'email' => fake()->safeEmail(),
