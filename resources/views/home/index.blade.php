@@ -81,29 +81,29 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Confirm Page</h5>
+                                    <h5 class="modal-title" id="staticBackdropLabel">Konfirmasi Pembayaran</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-3 row">
-                                        <label for="packageName" class="col-sm-2 col-form-label">Package</label>
+                                        <label for="packageName" class="col-sm-2 col-form-label">Paket</label>
                                         <div class="col-sm-10">
                                             <input id="packageName"type="text" readonly class="form-control-plaintext"
                                                 id="packageName" value="{{$priceData->name}}" disabled>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="packagePrice" class="col-sm-2 col-form-label">Price</label>
+                                        <label for="packagePrice" class="col-sm-2 col-form-label">Harga</label>
                                         <div class="col-sm-10">
                                             <input id="packagePrice" type="text" readonly class="form-control-plaintext"
-                                                id="packagePrice" value="{{$priceData->price}}" disabled>
+                                                id="packagePrice" value="{{number_format($priceData->price, 0, ",", ".")}}" disabled>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button id="pay-button" type="button" class="btn btn-primary">Understood</button>
+                                    <button id="pay-button" type="button" class="btn btn-primary">Bayar!</button>
                                 </div>
                             </div>
                         </div>
