@@ -102,7 +102,7 @@
             </div>
             <div class="col-12 bg-dark align-self-end bg-opacity-10 footer-bag">
                 <div class="container">
-                    PhotoBox @ 2022
+                    Photata @ 2022
                 </div>
             </div>
         </div>
@@ -148,12 +148,12 @@
                     success: function(data) { // check if available
                         // status.text('Waiting for Scanning!');
                         var tokenBayar = data.token
-                        console.log(tokenBayar)
+                        // console.log(tokenBayar)
                         window.snap.pay(tokenBayar, {
                             onSuccess: function(result) {
                                 /* You may add your own implementation here */
-                                alert("payment success!");
-                                console.log(result);
+                                window.close();
+                                // console.log(result);
                             },
                             onPending: function(result) {
                                 /* You may add your own implementation here */
