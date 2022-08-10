@@ -160,7 +160,7 @@
                                 /* You may add your own implementation here */
                                 $('.status-payment').text('Payment Berhasil, Happy Snap!');
                                 sleep(3000);
-                                window.location.href='{!! config('dslr.url') !== '' ? config('dslr.url') : '' !!}
+                                window.location.href='{!! config('dslr.url') !== '' ? config('dslr.url') : '' !!}'
                                 // console.log(result);
                             },
                             onPending: function(result) {
