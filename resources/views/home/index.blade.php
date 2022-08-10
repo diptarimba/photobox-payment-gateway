@@ -114,6 +114,9 @@
 
 @section('footer')
     <script>
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
         $(document).ready(() => {
             $('#select-price').on('change', function() {
                 $('#select-price option').each(function() {
@@ -156,7 +159,7 @@
                             onSuccess: function(result) {
                                 /* You may add your own implementation here */
                                 $('.status-payment').text('Payment Berhasil, Happy Snap!');
-                                await new Promise(r => setTimeout(r, 3000));
+                                sleep(3000);
                                 window.close();
                                 // console.log(result);
                             },
