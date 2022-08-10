@@ -49,7 +49,7 @@
                 </figure>
             </div>
             <div class="col-12 align-self-center">
-                <p class="status-payment h3 text-red"></p>
+                <p class="status-payment h3 text-danger text-center"></p>
             </div>
             <div class="col-12 align-self-center">
                 <div class="col-lg-3 col-md-6 col-6 mx-auto">
