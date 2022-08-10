@@ -97,7 +97,7 @@
                                         <label for="packagePrice" class="col-sm-2 col-form-label">Harga</label>
                                         <div class="col-sm-10">
                                             <input id="packagePrice" type="text" readonly class="form-control-plaintext"
-                                                id="packagePrice" value="{{number_format($priceData->price, 0, ",", ".")}}" disabled>
+                                                id="packagePrice" value="Rp. {{number_format($priceData->price, 0, ",", ".")}}" disabled>
                                         </div>
                                     </div>
                                 </div>
