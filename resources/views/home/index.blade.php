@@ -4,14 +4,66 @@
 
 @section('header')
     <style>
+        @font-face {
+            font-family: '1up';
+            src: url('{{ asset('1up.ttf') }}') format('truetype');
+            /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+        }
+
         body {
             --var-color: rgb(0, 238, 255);
         }
 
-        .header-bg {
+        .header-bg-rotate {
             background-image: linear-gradient(45deg, red, yellow);
             animation: hue-rotate 2s linear infinite alternate;
             height: 100%;
+        }
+
+        .header-bg-static {
+            position: relative;
+            height: 30vh;
+            width: 100vw;
+            background-image: linear-gradient(#e71a21 33.33%, #dfc75d 33.33%, #dfc75d 66.66%, #84acdb 66.66%);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            margin: 0px;
+        }
+
+        .body-bg {
+            height: 70vh;
+            background-color: #19181b;
+            border: 4px solid #84acdb;
+        }
+
+        .logo-fix {
+            max-width: 600px;
+            width: 100%;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0 0.3rem 0.1rem black);
+        }
+        .buttn {
+            border: 2px solid #e8c570;
+            background-color: #19181b;
+            color: white;
+            padding: 5px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 30%;
+        }
+        .buttn-price {
+            border-radius: 30px;
+            border-color: #e8c570;
+            color: white
+        }
+
+        .buttn-submit {
+            background-color: #84acdb;
+            color: black;
         }
 
         @keyframes hue-rotate {
@@ -20,65 +72,56 @@
             }
         }
 
+        .font-1-up {
+            font-family: '1up', 'Sans-Serif';
+        }
+
+        .big-font {
+            font-size: 50px;
+        }
+
+        .color-red {
+            color: #e73924;
+        }
+
         .footer-bag {
             height: 100%;
         }
     </style>
     @if (config('midtrans.is_production') == true)
-    <script type="text/javascript"
-    src="https://app.midtrans.com/snap/snap.js"
-    data-client-key="{{config('midtrans.client_key')}}"></script>
+        <script type="text/javascript" src="https://app.midtrans.com/snap/snap.js"
+            data-client-key="{{ config('midtrans.client_key') }}"></script>
     @else
-    <script type="text/javascript"
-    src="https://app.sandbox.midtrans.com/snap/snap.js"
-    data-client-key="{{config('midtrans.client_key')}}"></script>
+        <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+            data-client-key="{{ config('midtrans.client_key') }}"></script>
     @endif
 @endsection
 
 @section('body')
     <div class="container-fluid min-vh-100 d-flex flex-column">
-        <div class="row flex-grow-1">
-            <div class="col-12 align-self-start header-bg">
-                {{-- <div class="text-center mt-4">
-                    <p class="h1 text-white">PHOTATA</p>
-                </div> --}}
-                <div class="mt-4 text-center">
-                    <img style="max-width: 400px" src="{{asset('LOGO.png')}}" alt="PHOTATA">
-                </div>
-                <figure class="text-center mt-4 col-6 mx-auto">
-                    <blockquote class="blockquote">
-                        <p>{{$quote->text}}</p>
-                    </blockquote>
-                    <figcaption class="blockquote-footer text-white ">
-                        <cite title="Source Title">{{$quote->author}}</cite>
-                    </figcaption>
-                </figure>
+        <div class="row">
+            <div class="col-12 header-bg-static">
+                <img class="logo-fix" src="{{ asset('LOGO.png') }}" alt="PHOTATA">
             </div>
-            <div class="col-12 align-self-center">
-                <p class="status-payment h3 text-danger text-center"></p>
-            </div>
-            <div class="col-12 align-self-center">
-                <div class="col-lg-3 col-md-6 col-6 mx-auto">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="text-center h2 text-white text-wrap header-bg">
-                                WANNA TAKE A PHOTO?
-                            </div>
-                            <input class="form-control text-center" disabled type="text" name="price" id="price" value="{{$priceData->price}}">
-                            {{-- <select id="select-price" class="form-select" aria-label="Default select example">
-                                <option selected>Select Package</option>
-                                @foreach ($priceData as $each)
-                                    <option value="{{ $each->price }}">{{ $each->name }} ( Rp.{{ number_format($each->price, 0, ',', '.') }} )</option>
-                                @endforeach
-                            </select> --}}
-                        </div>
-                        <button class="btn btn-primary btnSubmit">Let's
-                            Go!</button>
+
+            <div class="col-12 body-bg">
+                <div class="mx-auto">
+                    <div class="status-payment font-1-up text-white text-center">
+                    </div>
+                    <div class="text-center text-wrap mt-5 font-1-up color-red big-font ">
+                        START PHOTO ?
+                    </div>
+                    <div class="text-center">
+                        <button class="buttn mt-5 buttn-price font-1-up" disabled type="text" name="price" id="price"
+                            value="{{ $priceData->price }}">Rp. {{ number_format($priceData->price, 0, ",", ".") }}</button>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary buttn-submit font-1-up btnSubmit mt-3">LET'S GO!</button>
                     </div>
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="staticBackdropLabel">Konfirmasi Pembayaran</h5>
@@ -90,14 +133,15 @@
                                         <label for="packageName" class="col-sm-2 col-form-label">Paket</label>
                                         <div class="col-sm-10">
                                             <input id="packageName"type="text" readonly class="form-control-plaintext"
-                                                id="packageName" value="{{$priceData->name}}" disabled>
+                                                id="packageName" value="{{ $priceData->name }}" disabled>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="packagePrice" class="col-sm-2 col-form-label">Harga</label>
                                         <div class="col-sm-10">
                                             <input id="packagePrice" type="text" readonly class="form-control-plaintext"
-                                                id="packagePrice" value="Rp. {{number_format($priceData->price, 0, ",", ".")}}" disabled>
+                                                id="packagePrice"
+                                                value="Rp. {{ number_format($priceData->price, 0, ',', '.') }}" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -109,12 +153,35 @@
                         </div>
                     </div>
                 </div>
+                <br>
+                <br>
+                <br>
+                <table class="text-white mt-2" style="letter-spacing: 3px;">
+                    <tbody>
+                        <tr>
+                            <td>INSTAGRAM</td>
+                            <td>: LA.PHOTATA</td>
+                        </tr>
+                        <tr>
+                            <td>WHATSAPP 1</td>
+                            <td>: +6281367370540</td>
+                        </tr>
+                        <tr>
+                            <td>WHATSAPP 2</td>
+                            <td>: +6282119802417</td>
+                        </tr>
+                        <tr>
+                            <td>E-MAIL</td>
+                            <td>: PHOTATABOX@GMAIL.com</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="col-12 bg-dark align-self-end bg-opacity-10 footer-bag">
+            {{-- <div class="col-12 bg-dark align-self-end bg-opacity-10 footer-bag">
                 <div class="container">
                     Photata @ 2022
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection
@@ -125,12 +192,12 @@
             return new Promise(resolve => setTimeout(resolve, ms));
         }
         $(document).ready(() => {
-            $('.btnSubmit').on('click', function(){
-                var name = '{{$priceData->name}}';
-                var price = '{{$priceData->price}}';
-                if(name !== '' && price !== ''){
+            $('.btnSubmit').on('click', function() {
+                var name = '{{ $priceData->name }}';
+                var price = '{{ $priceData->price }}';
+                if (name !== '' && price !== '') {
                     $('#staticBackdrop').modal('toggle');
-                }else{
+                } else {
                     alert('Silahkan Pilih Paket Terlebih Dahulu!');
                 }
             })
@@ -156,9 +223,10 @@
                         window.snap.pay(tokenBayar, {
                             onSuccess: function(result) {
                                 /* You may add your own implementation here */
-                                $('.status-payment').text('Payment Berhasil, Happy Snap!');
+                                $('.status-payment').text(
+                                    'Payment Berhasil, Happy Snap!');
                                 sleep(3000);
-                                window.location.href='{!! config('dslr.url') !== '' ? config('dslr.url') : '' !!}'
+                                window.location.href = '{!! config('dslr.url') !== '' ? config('dslr.url') : '' !!}'
                                 // console.log(result);
                             },
                             onPending: function(result) {
@@ -174,7 +242,8 @@
                             onClose: function() {
                                 /* You may add your own implementation here */
                                 alert(
-                                    'you closed the popup without finishing the payment');
+                                    'you closed the popup without finishing the payment'
+                                );
                             }
                         })
                     },
