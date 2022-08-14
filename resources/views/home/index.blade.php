@@ -37,13 +37,12 @@
         }
 
         .logo-fix {
-            max-width: 600px;
-            width: 100%;
-            margin: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 80%;
+            margin: 1% auto;
             filter: drop-shadow(0 0.3rem 0.1rem black);
         }
         .buttn {
@@ -86,6 +85,12 @@
 
         .footer-bag {
             height: 100%;
+        }
+
+        .contact {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
         }
     </style>
     @if (config('midtrans.is_production') == true)
@@ -153,10 +158,7 @@
                         </div>
                     </div>
                 </div>
-                <br>
-                <br>
-                <br>
-                <table class="text-white mt-2" style="letter-spacing: 3px;">
+                <table class="text-white contact" style="letter-spacing: 3px;">
                     <tbody>
                         <tr>
                             <td>INSTAGRAM</td>
