@@ -17,17 +17,17 @@ class PriceSeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'PAKET A',
-                'price' => 10000
+                'name' => 'PHOTO',
+                'price' => 25000
             ],
-            [
-                'name' => 'PAKET B',
-                'price' => 20000
-            ],
-            [
-                'name' => 'PAKET C',
-                'price' => 30000
-            ]
+            // [
+            //     'name' => 'PAKET B',
+            //     'price' => 20000
+            // ],
+            // [
+            //     'name' => 'PAKET C',
+            //     'price' => 30000
+            // ]
         ];
 
         Price::insert($data);
