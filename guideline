@@ -1,0 +1,22 @@
+# Directory C:\xampp\apache\conf\extra\httpd-vhosts.conf
+# Virtual host of photata.com
+<VirtualHost *:80>
+    DocumentRoot "D:\PHOTATA PAYMENT\public"
+    ServerAdmin photata.com
+    <Directory "D:\PHOTATA PAYMENT\public">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+# run xampp 24/7
+
+# make domain for replace
+
+# C:\Windows\System32\drivers\etc\hosts
+127.0.0.1 photata.com
+
+# APP TRIGGER located to laravel\public\start.bat
+
+
