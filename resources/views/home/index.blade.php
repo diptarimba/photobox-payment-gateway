@@ -3,96 +3,6 @@
 @section('tab-title', 'Home')
 
 @section('header')
-    <style>
-        @font-face {
-            font-family: '1up';
-            src: url('{{ asset('1up.ttf') }}') format('truetype');
-            /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-        }
-
-        body {
-            --var-color: rgb(0, 238, 255);
-        }
-
-        .header-bg-rotate {
-            background-image: linear-gradient(45deg, red, yellow);
-            animation: hue-rotate 2s linear infinite alternate;
-            height: 100%;
-        }
-
-        .header-bg-static {
-            position: relative;
-            height: 30vh;
-            width: 100vw;
-            background-image: linear-gradient(#e71a21 33.33%, #dfc75d 33.33%, #dfc75d 66.66%, #84acdb 66.66%);
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-            margin: 0px;
-        }
-
-        .body-bg {
-            height: 70vh;
-            background-color: #19181b;
-            border: 4px solid #84acdb;
-        }
-
-        .logo-fix {
-            display: block;
-            width: auto;
-            height: auto;
-            max-width: 100%;
-            max-height: 80%;
-            margin: 1% auto;
-            filter: drop-shadow(0 0.3rem 0.1rem black);
-        }
-        .buttn {
-            border: 2px solid #e8c570;
-            background-color: #19181b;
-            color: white;
-            padding: 5px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            width: 30%;
-        }
-        .buttn-price {
-            border-radius: 30px;
-            border-color: #e8c570;
-            color: white
-        }
-
-        .buttn-submit {
-            background-color: #84acdb;
-            color: black;
-        }
-
-        @keyframes hue-rotate {
-            to {
-                filter: hue-rotate(90deg);
-            }
-        }
-
-        .font-1-up {
-            font-family: '1up', 'Sans-Serif';
-        }
-
-        .big-font {
-            font-size: 50px;
-        }
-
-        .color-red {
-            color: #e73924;
-        }
-
-        .footer-bag {
-            height: 100%;
-        }
-
-        .contact {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-        }
-    </style>
     @if (config('midtrans.is_production') == true)
         <script type="text/javascript" src="//app.midtrans.com/snap/snap.js"
             data-client-key="{{ config('midtrans.client_key') }}"></script>
@@ -103,88 +13,65 @@
 @endsection
 
 @section('body')
-    <div class="container-fluid min-vh-100 d-flex flex-column">
-        <div class="row">
-            <div class="col-12 header-bg-static">
-                <img class="logo-fix" src="{{ asset('LOGO.png') }}" alt="PHOTATA">
-            </div>
-
-            <div class="col-12 body-bg">
-                <div class="mx-auto">
-                    <div class="status-payment font-1-up text-white text-center">
+    <div class="box_content">
+        <div class="d-flex justify-content-between align-items-center py-lg-4 pb-2 py-xxl-0">
+            <img src="{{ asset('img/logo-photo.png') }}" class="logo" width="60%" alt="" />
+            <button class="button_launch" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <img src="{{ asset('img/LAUNCH.svg') }}" alt="" />
+            </button>
+            {{-- <div class="status-payment text-white text-center"> --}}
+        </div>
+        <!-- Modal -->
+        <input type="hidden" name="price" id="price" value="{{ $priceData->price }}">
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Konfirmasi Pembayaran</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="text-center text-wrap mt-5 font-1-up color-red big-font ">
-                        START PHOTO ?
-                    </div>
-                    <div class="text-center">
-                        <button class="buttn mt-5 buttn-price font-1-up" disabled type="text" name="price" id="price"
-                            value="{{ $priceData->price }}">Rp. {{ number_format($priceData->price, 0, ",", ".") }}</button>
-                    </div>
-                    <div class="text-center">
-                        <button class="btn btn-primary buttn-submit font-1-up btnSubmit mt-3">LET'S GO!</button>
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Konfirmasi Pembayaran</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="mb-3 row">
-                                        <label for="packageName" class="col-sm-2 col-form-label">Paket</label>
-                                        <div class="col-sm-10">
-                                            <input id="packageName"type="text" readonly class="form-control-plaintext"
-                                                id="packageName" value="{{ $priceData->name }}" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label for="packagePrice" class="col-sm-2 col-form-label">Harga</label>
-                                        <div class="col-sm-10">
-                                            <input id="packagePrice" type="text" readonly class="form-control-plaintext"
-                                                id="packagePrice"
-                                                value="Rp. {{ number_format($priceData->price, 0, ',', '.') }}" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button id="pay-button" type="button" class="btn btn-primary">Bayar!</button>
-                                </div>
+                    <div class="modal-body">
+                        <div class="mb-3 row">
+                            <label for="packageName" class="col-sm-2 col-form-label">Paket</label>
+                            <div class="col-sm-10">
+                                <input id="packageName"type="text" readonly class="form-control-plaintext"
+                                    id="packageName" value="{{ $priceData->name }}" disabled>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="packagePrice" class="col-sm-2 col-form-label">Harga</label>
+                            <div class="col-sm-10">
+                                <input id="packagePrice" type="text" readonly class="form-control-plaintext"
+                                    id="packagePrice" value="Rp. {{ number_format($priceData->price, 0, ',', '.') }}"
+                                    disabled>
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="pay-button" type="button" class="btn btn-primary">Bayar!</button>
+                    </div>
                 </div>
-                <table class="text-white contact" style="letter-spacing: 3px;">
-                    <tbody>
-                        <tr>
-                            <td>INSTAGRAM</td>
-                            <td>: LA.PHOTATA</td>
-                        </tr>
-                        <tr>
-                            <td>WHATSAPP 1</td>
-                            <td>: +6281367370540</td>
-                        </tr>
-                        <tr>
-                            <td>WHATSAPP 2</td>
-                            <td>: +6282119802417</td>
-                        </tr>
-                        <tr>
-                            <td>E-MAIL</td>
-                            <td>: PHOTATABOX@GMAIL.com</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-            {{-- <div class="col-12 bg-dark align-self-end bg-opacity-10 footer-bag">
-                <div class="container">
-                    Photata @ 2022
-                </div>
-            </div> --}}
         </div>
+    </div>
+    </div>
+    </div>
+    <div class="box_text">
+        <h1>
+            HALLO! <br />
+            WELCOME TO OUR SHIP <br />
+            IN THIS SHIP WE CAN SHARE OUR MOMENT <br />
+            FEEL FREE WITH YOUR POSE <br />
+            IF YOU READY TO TAKE OFF, PRESS THE "LAUNCH" BUTTON <br />
+            AND IF YOU HAVE A PROBLEM YOU CAN CONTACT US
+        </h1>
+        <ul style="list-style-type: square" class="d-flex flex-column flex-lg-row gap-lg-5 py-0 align-items-lg-center mt-4">
+            <li class="ps-2">INSTAGRAM : LA.PHOTO</li>
+            <li class="ps-2">WHATSAPP : +6281367370540 / +6282119802417</li>
+        </ul>
+    </div>
     </div>
 @endsection
 
@@ -210,6 +97,7 @@
             payButton.addEventListener('click', function() {
                 // Update Web Check
                 var cost = $('#price').val();
+                console.log(cost)
                 $.ajax({
                     url: '{{ route('home.index') }}',
                     dataType: 'json',

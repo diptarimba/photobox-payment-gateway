@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Andale Mono";
+    src: url("/ANDALEMO.TTF") format("truetype");
+}
+
+html {
+    margin: auto !important;
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+}
+
+body {
+    font-family: "Andale Mono";
+    background-image: url(../img/bg1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+    padding: 2rem;
+    background-color: #b6b6b6;
+}
+
+.box_content {
+    padding: 2rem;
+}
+
+ul li,
+h1 {
+    font-weight: 500 !important;
+    color: #68b3c9;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+ul li {
+    font-size: 1.375rem;
+}
+
+ul {
+    list-style: none !important;
+    padding: 1rem !important;
+    margin: 0 !important;
+}
+
+li::marker {
+    content: "\25A0";
+    font-size: 1.5rem;
+    margin-right: 2rem !important;
+}
+
+.box_text {
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 4rem 3rem;
+    width: 100%;
+    height: 500px; /* ubah nilai height sesuai dengan kebutuhan Anda */
+    border-radius: 12px;
+    background-image: url(../img/bg3.png);
+}
+
+.button_launch {
+    border: none;
+    border-radius: 19px;
+    background-color: none !important;
+}
+
+.button_launch img {
+    width: 16rem;
+}
+
+@media only screen and (min-width: 1440px) {
+    html {
+        width: 100% !important;
+        overflow-x: hidden !important;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 1199.98px) {
+    .container {
+        max-width: fit-content !important;
+    }
+    img.logo {
+        width: 40%;
+    }
+    .button_launch img {
+        width: 12rem;
+    }
+    h1 {
+        font-size: 1.25rem;
+    }
+    ul li {
+        font-size: 1.125rem;
+    }
+}
+
+@media only screen and (min-width: 750px) and (max-width: 991.98px) {
+    .box_text {
+        background-image: url(../img/bg-md.png);
+        width: 100% !important;
+    }
+    body {
+        background-size: cover;
+    }
+}
+
+@media only screen and (max-width: 749.98px) {
+    .container {
+        max-width: fit-content !important;
+    }
+    body {
+        background-size: cover;
+    }
+    .box_text {
+        background-image: url(../img/bg-sm.svg);
+        background-size: cover;
+        height: 100%;
+        background-position: center;
+        width: 100%;
+        padding: 4rem 2rem;
+    }
+    img.logo {
+        width: 50%;
+    }
+    .button_launch img {
+        width: 10rem;
+    }
+    h1 {
+        font-size: 1.125rem;
+    }
+    ul li {
+        font-size: 1rem;
+    }
+    .box_content {
+        padding: 2rem 0.5rem;
+    }
+}
